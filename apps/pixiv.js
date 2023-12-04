@@ -19,7 +19,7 @@ const randomImgReg = new RegExp(`^#?来(${numReg})?张(好(康|看)(的|哒)|hkd
 export class NewPixiv extends plugin {
   constructor () {
     super({
-      name: '椰奶pixiv',
+      name: '派蒙pixiv',
       event: 'message',
       priority: 500,
       rule: [
