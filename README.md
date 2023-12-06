@@ -1,5 +1,9 @@
+写写bug，改改文本
+```
+git clone --depth=1 https://github.com/misaka20002/yenai-plugin.git ./plugins/yenai-plugin
+```
 
-<img src="resources/img/logo.gif" alt="看板娘" width = "200" align="right">
+
 
 <div align="left">
 
