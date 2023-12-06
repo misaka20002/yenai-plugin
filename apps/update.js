@@ -138,7 +138,7 @@ export class Update extends plugin {
 
     let end = ''
     end =
-      '更多详细信息，请前往gitee查看\nhttps://gitee.com/yeyang52/yenai-plugin/blob/master/CHANGELOG.md'
+      '更多详细信息，请前往git查看'
     let forwardMsg = [
       `椰奶插件更新日志，共${line}条`, log, end
     ]
