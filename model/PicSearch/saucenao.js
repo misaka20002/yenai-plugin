@@ -17,7 +17,7 @@ export default async function doSearch (url) {
       `SauceNAO (${item.similarity}%)\n`,
       Config.picSearch.hideImg ? '' : await request.proxyRequestImg(item.thumbnail),
       `图源：${item.site.replace(/\./g, "点")}\n`,
-      `作者：${item.authorName}(${item.authorUrl})\n`,
+      `作者：${item.authorName}(${item.authorUrl.replace(/\./g, "点")})\n`,
       `来源：${item.url.toString().replace(/\./g, "点")}`
       ]
   let maxSimilarity = format[0].similarity
