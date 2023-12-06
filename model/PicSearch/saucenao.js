@@ -12,13 +12,13 @@ export default async function doSearch (url) {
   
   
   
-
+  let authorUrlchange = item.authorUrl.replace(/\./g, "点")
   let msgMap = async item => [
       `SauceNAO (${item.similarity}%)\n`,
       Config.picSearch.hideImg ? '' : await request.proxyRequestImg(item.thumbnail),
-      `图源：${item.site?.replace(/\./g, "点")}\n`,
-      `作者：${item.authorName?}(${item.authorUrl?.replace(/\./g, "点")})\n`,
-      `来源：${item.url?.toString().replace(/\./g, "点")}`
+      `图源：${item.site.replace(/\./g, "点")}\n`,
+      `作者：${item.authorName}(${authorUrlchange})\n`,
+      `来源：${item.url.toString().replace(/\./g, "点")}`
       ]
   let maxSimilarity = format[0].similarity
   let filterSimilarity = format.filter(item => item.similarity > 80)
