@@ -128,6 +128,30 @@ export class GroupAdmin extends plugin {
           fnc: 'Group_xj'
         },
         {
+          reg: '^#群?管理员榜$',
+          fnc: 'Group_gly'
+        },
+        {
+          reg: '^#群?龙王(争霸)?榜$',
+          fnc: 'Group_lw'
+        },
+        {
+          reg: '^#群?屠龙榜$',
+          fnc: 'Group_tl'
+        },
+        {
+          reg: '^#群?(全部)?榜(单)?$',
+          fnc: 'Group_rank'
+        },
+        {
+          reg: '^#群?(等级)?积分(上升)?榜$',
+          fnc: 'Group_scoreincr'
+        },
+        {
+          reg: '^#群?等级榜$',
+          fnc: 'Group_level'
+        },
+        {
           reg: '^#群数据((7|七)天)?$',
           fnc: 'groupData'
         },
@@ -162,7 +186,7 @@ export class GroupAdmin extends plugin {
 
   /** 禁言 */
   async muteMember (e) {
-    if (!(this.e.isMaster || this.e.user_id == 1509293009 || this.e.user_id == 2536554304)) { return true }
+    if (!(this.e.isMaster)) return true 
     let qq = e.message.find(item => item.type == 'at')?.qq
     let reg = `#禁言\\s?((\\d+)\\s)?(${Numreg})?(${TimeUnitReg})?`
     let regRet = e.msg.match(new RegExp(reg))
@@ -175,7 +199,7 @@ export class GroupAdmin extends plugin {
 
   /** 解禁 */
   async noMuteMember (e) {
-    if (!(this.e.isMaster || this.e.user_id == 1509293009 || this.e.user_id == 2536554304)) { return true }
+    if (!(this.e.isMaster)) return true 
 
     let qq = e.message.find(item => item.type == 'at')?.qq
     let regRet = e.msg.match(/#解禁(\d+)/)
@@ -187,7 +211,7 @@ export class GroupAdmin extends plugin {
 
   /** 全体禁言 */
   async muteAll (e) {
-    if (!(this.e.isMaster || this.e.user_id == 1509293009 || this.e.user_id == 2536554304)) { return true }
+    if (!(this.e.isMaster)) return true 
 
     let type = /全体禁言/.test(e.msg)
     let res = await e.group.muteAll(type)
@@ -197,7 +221,7 @@ export class GroupAdmin extends plugin {
 
   // 踢群员
   async kickMember (e) {
-    if (!(this.e.isMaster || this.e.user_id == 1509293009 || this.e.user_id == 2536554304)) { return true }
+    if (!(this.e.isMaster)) return true 
 
     let qq = e.message.find(item => item.type == 'at')?.qq
     if (!qq) qq = e.msg.replace(/#|踢/g, '').trim()
@@ -226,7 +250,7 @@ export class GroupAdmin extends plugin {
 
   // 设置管理
   async SetAdmin (e) {
-    if (!(this.e.isMaster || this.e.user_id == 1509293009 || this.e.user_id == 2536554304)) { return true }
+    if (!(this.e.isMaster)) return true 
     let qq = e.message.find(item => item.type == 'at')?.qq
     let type = /设置管理/.test(e.msg)
     if (!qq) qq = e.msg.replace(/#|(设置|取消)管理/g, '').trim()
@@ -244,7 +268,7 @@ export class GroupAdmin extends plugin {
 
   // 匿名
   async AllowAnony (e) {
-    if (!(this.e.isMaster || this.e.user_id == 1509293009 || this.e.user_id == 2536554304)) { return true }
+    if (!(this.e.isMaster)) return true 
 
     let type = /(允许|开启)匿名/.test(e.msg)
     let res = await e.group.allowAnony(type)
@@ -254,7 +278,7 @@ export class GroupAdmin extends plugin {
 
   // 发群公告
   async AddAnnounce (e) {
-    if (!(this.e.isMaster || this.e.user_id == 1509293009 || this.e.user_id == 2536554304)) { return true }
+    if (!(this.e.isMaster)) return true 
     // 获取发送的内容
     let msg = e.msg.replace(/#|发群公告/g, '').trim()
     if (!msg) return e.reply('❎ 公告不能为空')
@@ -276,7 +300,7 @@ export class GroupAdmin extends plugin {
 
   // 删群公告
   async DelAnnounce (e) {
-    if (!(this.e.isMaster || this.e.user_id == 1509293009 || this.e.user_id == 2536554304)) { return true }
+    if (!(this.e.isMaster)) return true 
     let msg = e.msg.replace(/#|删群公告/, '').trim()
     if (!msg) return e.reply('❎ 序号不可为空')
 
@@ -360,7 +384,7 @@ export class GroupAdmin extends plugin {
 
   // 替换幸运字符
   async qun_luckyuse (e) {
-    if (!(this.e.isMaster || this.e.user_id == 1509293009 || this.e.user_id == 2536554304)) { return true }
+    if (!(this.e.isMaster)) return true 
     let id = e.msg.replace(/#|替换(幸运)?字符/g, '')
     let res = await new QQApi(e).equipLucky(e.group_id, id)
 
@@ -371,7 +395,7 @@ export class GroupAdmin extends plugin {
 
   // 开启或关闭群字符
   async qun_luckyset (e) {
-    if (!(this.e.isMaster || this.e.user_id == 1509293009 || this.e.user_id == 2536554304)) { return true }
+    if (!(this.e.isMaster)) return true 
 
     let res = await new QQApi(e).swichLucky(e.group_id, /开启/.test(e.msg))
     if (!res) return e.reply(API_ERROR)
@@ -393,7 +417,7 @@ export class GroupAdmin extends plugin {
 
   // 解除全部禁言
   async relieveAllMute (e) {
-    if (!(this.e.isMaster || this.e.user_id == 1509293009 || this.e.user_id == 2536554304)) { return true }
+    if (!(this.e.isMaster)) return true 
     new Ga(e).releaseAllMute()
       .then(() => e.reply('已经把全部的禁言解除辣╮( •́ω•̀)╭'))
       .catch(err => common.handleException(e, err))
@@ -401,7 +425,7 @@ export class GroupAdmin extends plugin {
 
   // 查看和清理多久没发言的人
   async noactive (e) {
-    if (!(this.e.isMaster || this.e.user_id == 1509293009 || this.e.user_id == 2536554304)) { return true }
+    if (!(this.e.isMaster)) return true 
 
     let regRet = noactivereg.exec(e.msg)
     regRet[2] = common.translateChinaNum(regRet[2] || 1)
@@ -445,7 +469,7 @@ export class GroupAdmin extends plugin {
 
   // 查看和清理从未发言的人
   async neverspeak (e) {
-    if (!(this.e.isMaster || this.e.user_id == 1509293009 || this.e.user_id == 2536554304)) { return true }
+    if (!(this.e.isMaster)) return true 
     let list = null
     try {
       list = await new Ga(e).getNeverSpeak(e.group_id)
@@ -455,6 +479,9 @@ export class GroupAdmin extends plugin {
 
     // 确认清理直接执行
     if (/^#?确认清理/.test(e.msg)) {
+      if (/秒|分钟|小时/g.test(e.msg)) {
+        return e.reply('不支持清理以秒、分钟、小时为单位的事件', true)
+      }
       e.reply('我要开始清理了哦，这可能需要一点时间٩(๑•ㅂ•)۶')
       let arr = list.map(item => item.user_id)
       let msg = await new Ga(e).BatchKickMember(e.group_id, arr)
@@ -558,7 +585,7 @@ export class GroupAdmin extends plugin {
   async Group_xj (e) {
     let screenshot = await puppeteer.Webpage({
       url: `https://qqweb.qq.com/m/business/qunlevel/index.html?gc=${e.group_id}&from=0&_wv=1027`,
-      cookie: common.getck('qun.qq.com', this.Bot, true),
+      cookie: common.getck('qqweb.qq.com', this.Bot, true),
       emulate: 'QQTheme',
       font: true
     })
@@ -575,6 +602,72 @@ export class GroupAdmin extends plugin {
       `群号：${group_uin}\n`,
       `群星级：${str}`
     ])
+  }
+
+  /** 群管理员榜 */
+  async Group_gly (e) {
+    let screenshot = await puppeteer.Webpage({
+      url: `https://qun.qq.com/active/rank/list?gc=${e.group_id}&type=manager&_wwv=128&_wv=16777218`,
+      cookie: common.getck('qun.qq.com', this.Bot, true),
+      emulate: 'QQTheme',
+      font: true
+    })
+    if (screenshot) return e.reply(screenshot)
+  }
+
+  /** 群龙王争霸榜 */
+  async Group_lw (e) {
+    let screenshot = await puppeteer.Webpage({
+      url: `https://qun.qq.com/active/rank/list?gc=${e.group_id}&type=dragon&_wwv=128&_wv=16777218`,
+      cookie: common.getck('qun.qq.com', this.Bot, true),
+      emulate: 'QQTheme',
+      font: true
+    })
+    if (screenshot) return e.reply(screenshot)
+  }
+
+  /** 群屠龙榜 */
+  async Group_tl (e) {
+    let screenshot = await puppeteer.Webpage({
+      url: `https://qun.qq.com/active/rank/list?gc=${e.group_id}&type=dragonkiller&_wwv=128&_wv=16777218`,
+      cookie: common.getck('qun.qq.com', this.Bot, true),
+      emulate: 'QQTheme',
+      font: true
+    })
+    if (screenshot) return e.reply(screenshot)
+  }
+
+  /** 群管全部榜 */
+  async Group_rank (e) {
+    let screenshot = await puppeteer.Webpage({
+      url: `https://qun.qq.com/active/rank/index?gc=${e.group_id}&_wwv=128`,
+      cookie: common.getck('qun.qq.com', this.Bot, true),
+      emulate: 'QQTheme',
+      font: true
+    })
+    if (screenshot) return e.reply(screenshot)
+  }
+
+  /** 群积分上升榜 */
+  async Group_scoreincr (e) {
+    let screenshot = await puppeteer.Webpage({
+      url: `https://qun.qq.com/active/rank/list?gc=${e.group_id}&type=scoreincr&_wwv=128&_wv=16777218`,
+      cookie: common.getck('qun.qq.com', this.Bot, true),
+      emulate: 'QQTheme',
+      font: true
+    })
+    if (screenshot) return e.reply(screenshot)
+  }
+
+  /** 群等级榜 */
+  async Group_level (e) {
+    let screenshot = await puppeteer.Webpage({
+      url: `https://qun.qq.com/interactive/levellist?gc=${e.group_id}&type=7&_wwv=3&_wv=128`,
+      cookie: common.getck('qun.qq.com', this.Bot, true),
+      emulate: 'QQTheme',
+      font: true
+    })
+    if (screenshot) return e.reply(screenshot)
   }
 
   // 群发言榜单

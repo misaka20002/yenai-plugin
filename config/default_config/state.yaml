@@ -19,3 +19,6 @@ statusPowerShellStart: false
 
 #背景图片api 默认https://api.dujin.org/bing/m.php
 backdrop: "https://api.dujin.org/bing/m.php"
+
+# 本体自定义头像 可填入url和本地路径
+YZAvatar: ""
