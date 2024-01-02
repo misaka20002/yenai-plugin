@@ -3,6 +3,7 @@ import { Config } from '../components/index.js'
 import { Pixiv, common, setu } from '../model/index.js'
 import { Admin } from './admin.js'
 import { ImageRPSS } from '../constants/pixiv.js'
+import cfg from '../../../lib/config/config.js'
 // 文案
 const SWITCH_ERROR = '主人没有开放这个功能哦(＊／ω＼＊)'
 // 汉字数字匹配正则
@@ -204,7 +205,8 @@ export class NewPixiv extends plugin {
   /** 推荐作品 */
   async illustRecommended (e) {
     if (!await this._Authentication(e, 'sese')) return
-    e.reply(Pixiv.startMsg)
+    let conf = cfg.getGroup(e.group_id)
+    e.reply((Pixiv.startMsg).replace('派蒙', conf.botAlias[0]))
     let num = e.msg.match(/\d+/) || 1
     await Pixiv.illustRecommended(num).then(res => {
       res.length == 1
