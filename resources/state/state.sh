@@ -6,7 +6,7 @@ if type fastfetch &>/dev/null;then
     fastfetch --stdout
   fi
 else
-  bash <(curl -L https://gitee.com/TimeRainStarSky/neofetch/raw/master/neofetch) --stdout
+  bash <(curl -L https://gitee.com/Misaka21011/neofetch/raw/master/neofetch) --stdout
 fi|\
 sed -n 's|: |</p><p>|p'|\
 while read i;do
