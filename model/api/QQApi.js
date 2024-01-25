@@ -427,14 +427,17 @@ export default class {
      * @return {Object}
      */
   async thumbUp(uid, times = 1) {
-    if (this.e?.adapter && this.e?.adapter == "shamrock") {
+    /** Chronocat点赞 */
+    if (this.Bot?.sendLike) return this.Bot.sendLike(uid, times)
+    /** Shamrock点赞 */
+    if (this.e?.adapter && this.e?.adapter == 'shamrock') {
       // 劫持为shamrock点赞
       let target = (this.e.at && this.e.msg.includes('他', '她', '它', 'TA', 'ta', 'Ta')) ? this.e.at : this.e.user_id
       let lock = await redis.get(`lain:thumbup:${this.e.self_id}_${target}`)
 
       // shamrock不管点没点上一律返回ok。。只好自己伪造了，不然椰奶会死循环，暂不考虑svip的情况。
       try {
-        const Api = (await import("../../../Lain-plugin/adapter/shamrock/api.js")).default
+        const Api = (await import('../../../Lain-plugin/adapter/shamrock/api.js')).default
         await Api.send_like(this.e.self_id, uid, times)
       } catch (err) {
         logger.error(err)
@@ -442,7 +445,7 @@ export default class {
       }
       if (lock) {
         // 今天点过了
-        return { code: 2, msg: `今天已经赞过了，还搁这讨赞呢！！！` }
+        return { code: 2, msg: '今天已经赞过了，还搁这讨赞呢！！！' }
       } else {
         const now = new Date()
         const tomorrow = new Date(now)
@@ -456,10 +459,12 @@ export default class {
     }
 
     let core = this.Bot.core
-    if (!core) try {
-      core = (await import('icqq')).core
-    } catch (error) {
-      throw Error('非icqq无法进行点赞')
+    if (!core) {
+      try {
+        core = (await import('icqq')).core
+      } catch (error) {
+        throw Error('非icqq无法进行点赞')
+      }
     }
     if (times > 20) { times = 20 }
     let ReqFavorite
