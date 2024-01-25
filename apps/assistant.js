@@ -727,7 +727,7 @@ export class Assistant extends plugin {
       source = (await e.friend.getChatHistory(e.source.time, 1)).pop()
     }
     let target = e.isGroup ? e.group : e.friend
-
+    // 如果此消息不是bot发送的，则判断#撤回 发送者的权限
     if (source.sender.user_id != this.Bot.uin) {
       if (e.isGroup) {
         // 群聊判断权限
@@ -737,6 +737,15 @@ export class Assistant extends plugin {
       } else {
         // 私聊判断是否为Bot消息
         return logger.warn(`${e.logFnc}引用不是Bot消息`)
+      }
+    }
+    // 新增：如果此消息是bot发送的，也需要管理员或群主才可以使用撤回
+    else {
+      if (e.isGroup) {
+        // 群聊判断权限
+        if (!e.isMaster && !e.member.is_owner && !e.member.is_admin) {
+          return logger.warn(`${e.logFnc}该群员权限不足`)
+        }
       }
     }
     if (source.message[0].type === 'file' && e.isGroup) {
