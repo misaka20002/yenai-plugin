@@ -156,7 +156,7 @@ export class NewPixiv extends plugin {
     let regRet = randomImgReg.exec(e.msg)
 
     let num = regRet[1] || 1
-    if (num > 50) {
+    if (num > 20) {
       e.reply('你要的太多辣，奴家只给你一张辣(•́へ•́ ╬)')
       num = 1
     }
@@ -206,6 +206,10 @@ export class NewPixiv extends plugin {
     if (!await this._Authentication(e, 'sese')) return
     e.reply(Pixiv.startMsg)
     let num = e.msg.match(/\d+/) || 1
+    if (num > 20) {
+      e.reply('嘤嘤嘤，人家累了，给你一张吧QAQ')
+      num = 1
+    }
     await Pixiv.illustRecommended(num).then(res => {
       res.length == 1
         ? common.recallsendMsg(e, res[0], true)
