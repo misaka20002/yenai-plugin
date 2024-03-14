@@ -461,7 +461,7 @@ export default class {
     let core = this.Bot.core
     if (!core) {
       try {
-        core = (await import('icqq')).core
+        core = (await import('@icqqjs/icqq')).core
       } catch (error) {
         throw Error('非icqq无法进行点赞')
       }
