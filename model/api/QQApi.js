@@ -463,7 +463,11 @@ export default class {
       try {
         core = (await import('@icqqjs/icqq')).core
       } catch (error) {
-        throw Error('非icqq无法进行点赞')
+        try {
+          core = (await import('icqq')).core
+        } catch (error) {
+          throw Error('非icqq无法进行点赞')
+        }
       }
     }
     if (times > 20) { times = 20 }

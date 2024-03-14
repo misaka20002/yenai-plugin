@@ -14,8 +14,13 @@ try {
   Contactable = (await import('oicq')).default
   core = (await import('oicq')).core
 } catch (error) {
-  Contactable = (await import('@icqqjs/icqq').catch(() => {}))?.default
-  core = (await import('@icqqjs/icqq').catch(() => {}))?.core
+  try {
+    Contactable = (await import('icqq')).default
+    core = (await import('icqq')).core
+  } catch (error) {
+    Contactable = (await import('@icqqjs/icqq').catch(() => {}))?.default
+    core = (await import('@icqqjs/icqq').catch(() => {}))?.core
+  }
 }
 
 async function uploadRecord (record_url, seconds = 0, transcoding = true) {
