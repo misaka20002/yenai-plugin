@@ -9,16 +9,16 @@ const NumReg = "[零一壹二两三四五六七八九十百千万亿\\d]+"
 export class SeSe extends plugin {
   constructor() {
     super({
-      name: "椰奶setu",
+      name: "派蒙搜图",
       event: "message",
       priority: 500,
       rule: [
         {
-          reg: "^#椰奶tag(.*)$",
+          reg: "^#派蒙搜图(.*)$",
           fnc: "setuTag"
         },
         {
-          reg: `^#(setu|无内鬼)\\s?((${NumReg})张)?$`, // 无内鬼
+          reg: `^#(setu|色图|涩图)\\s?((${NumReg})张)?$`, // 无内鬼
           fnc: "setuRandom"
         },
         {
@@ -51,9 +51,9 @@ export class SeSe extends plugin {
     let num = e.msg.match(new RegExp(NumReg))
     num = num ? translateChinaNum(num[0]) : 1
     if (num > 20) {
-      return e.reply("❎ 最大张数不能大于20张")
-    } else if (num > 6) {
-      e.reply("你先等等，你冲的有点多~")
+      return e.reply("❎ 最大张数不能大于20张哦")
+    } else if (num > 16) {
+      e.reply("诶，这...这么多，派蒙要找很久的，要慢慢等哦")
     }
 
     // 开始执行
@@ -69,9 +69,9 @@ export class SeSe extends plugin {
     if (!await this._Authentication(e)) return
 
     let cdTime = setu.getRemainingCd(e.user_id, e.group_id)
-    if (cdTime) return e.reply(` ${setu.CDMsg}你的CD还有${cdTime}`, false, { at: true })
+    if (cdTime) return e.reply(` ${setu.CDMsg}，你的CD还有${cdTime}`, false, { at: true })
 
-    let tag = e.msg.replace(/#|椰奶tag/g, "").trim()
+    let tag = e.msg.replace("#派蒙搜图", '').trim()
     let num = e.msg.match(new RegExp(`(${NumReg})张`))
     if (!num) {
       num = 1
@@ -81,9 +81,9 @@ export class SeSe extends plugin {
     }
 
     if (num > 20) {
-      return e.reply("❎ 最大张数不能大于20张")
+      return e.reply("❎ 最大张数不能大于20张哦")
     } else if (num > 6) {
-      e.reply("你先等等，你冲的有点多~")
+      e.reply("诶，这...这么多，派蒙要找很久的，要慢慢等哦")
     } else {
       e.reply(setu.startMsg)
     }
@@ -106,7 +106,7 @@ export class SeSe extends plugin {
     }
     if (!common.checkSeSePermission(e, "sesepro")) return false
     if (!await common.limit(e.user_id, "setu", limit)) {
-      e.reply("您已达今日「setu」次数上限", true, { at: true })
+      e.reply("您已达今日「派蒙搜图」次数上限", true, { at: true })
       return false
     }
     return true

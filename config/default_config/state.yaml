@@ -27,7 +27,8 @@ statusPowerShellStart: false
 # http://dir.dengfenglai.icu
 # 默认地址(直连，但是不确定是否会GG)
 # https://t.mwm.moe/mp/
-backdrop: "http://dir.dengfenglai.icu"
+# backdrop: "http://dir.dengfenglai.icu"
+backdrop: "https://api.dujin.org/bing/m.php"
 
 # 当api请求失败时使用的默认背景图，请放置在resources/state/img/bg目录下
 # random - 随机选择state/img/bg目录里的一张图片

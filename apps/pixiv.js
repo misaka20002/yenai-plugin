@@ -20,7 +20,7 @@ const randomImgReg = new RegExp(`^#?来(${numReg})?张(好(康|看)(的|哒)|hkd
 export class NewPixiv extends plugin {
   constructor() {
     super({
-      name: "椰奶pixiv",
+      name: "派蒙pixiv",
       event: "message",
       priority: 500,
       rule: [
@@ -166,7 +166,7 @@ export class NewPixiv extends plugin {
     let regRet = randomImgReg.exec(e.msg)
 
     let num = regRet[1] || 1
-    if (num > 50) {
+    if (num > 20) {
       e.reply("你要的太多辣，奴家只给你一张辣(•́へ•́ ╬)")
       num = 1
     }

@@ -28,7 +28,7 @@ export const helpList = [
       },
       {
         icon: 2,
-        title: "#椰奶tag <关键词*3>",
+        title: "#派蒙搜图 <关键词*3>[n张]",
         desc: "luoli接口搜索tag"
       },
       {
