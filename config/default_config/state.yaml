@@ -54,12 +54,16 @@ BotNameColor: "#000"
 # 该值请参考https://developer.mozilla.org/zh-CN/docs/Web/CSS/gradient/linear-gradient
 # xxdeg 为渐变角度 后为渐变颜色
 # 原来花里胡哨的渐变271.14deg,#001bff 0.98%,#00f0ff 25.79%,#fce84a 47.33%,#f34628 65.77%,#b275ff 91.4%
-BotNameColorGradient: "none"
+# BotNameColorGradient: "none" // 黑色
+BotNameColorGradient: "271.14deg,#001bff 0.98%,#00f0ff 25.79%,#fce84a 47.33%,#f34628 65.77%,#b275ff 91.4%"
 
 #主硬件进度条和磁盘进度条的颜色
 #严重
-highColor: "#d73403"
+# highColor: "#d73403"
+highColor: "#d73403e5"
 #警告
-mediumColor: "#ffa500"
+# mediumColor: "#ffa500"
+mediumColor: "rgba(235, 50, 180, 0.856)"
 #正常
-lowColor: "#84A0DF"
+# lowColor: "#84A0DF"
+lowColor: "rgba(255, 139, 187, 0.856)"

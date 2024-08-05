@@ -118,12 +118,12 @@
 }
 
 :root {
-  --high-color: #d73403e5;
-  --medium-color: rgba(235, 50, 180, 0.856);
-  --low-color: rgba(255, 139, 187, 0.856);
+  --high-color: #d73403;
+  --medium-color: #ffa500;
+  --low-color: #87CEEB;
   --avatar-main-color: #fff1eb;
   --avatar-similar-color1: #fff1eb;
-  --avatar-similar-color2: rgba(255, 139, 187, 0.856);
+  --avatar-similar-color2: #ace0f9;
 }
 
 .container {
@@ -269,7 +269,7 @@ body {
   background: var(--blue);
 }
 .botInfo .header table {
-  background: rgba(255, 139, 187, 0.856);
+  background: #67abdb;
   border-radius: 5px;
   box-shadow: #000 1px 1px 3px;
   margin: auto;
