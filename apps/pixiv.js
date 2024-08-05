@@ -4,6 +4,7 @@ import { Pixiv, common, setu } from "../model/index.js"
 import { Admin } from "./admin.js"
 import { ImageRPSS } from "../constants/pixiv.js"
 import translateChinaNum from "../tools/translateChinaNum.js"
+import moment from "moment";
 // 文案
 const SWITCH_ERROR = "主人没有开放这个功能哦(＊／ω＼＊)"
 // 汉字数字匹配正则
@@ -219,9 +220,49 @@ export class NewPixiv extends plugin {
    * @param e
    */
   async illustRecommended(e) {
+    // 判断个人CD---------------------------------------------------------    
+    let cd_time = 60
+    let cd_time_batch = 300
+    let currentTime = moment(new Date()).format("YYYY-MM-DD HH:mm:ss");
+    let lastTime = await redis.get(`Yz:PaimongLaiFenTuiJianTu:${e.group_id}:${e.user_id}`);
+    let PaimongLaiFenTuiJianTuBatchLastTime = await redis.get(`Yz:PaimongLaiFenTuiJianTuBatch:${e.group_id}:${e.user_id}`);
+    if (PaimongLaiFenTuiJianTuBatchLastTime && !e.isMaster) {
+      let seconds = moment(currentTime).diff(moment(PaimongLaiFenTuiJianTuBatchLastTime), "seconds");
+      if ((cd_time_batch - seconds) <= 0) {
+        await this.clearCD(e)
+        return await e.reply(`派蒙数据库错误，已尝试修复，请重试`, false, { recallMsg: 30 });
+      }
+      return await e.reply(`人家刚刚找了太多啦，好累了，请等待${cd_time_batch - seconds}秒后再使用`, false, { recallMsg: 15 });
+    }
+    if (lastTime && !e.isMaster) {
+      let seconds = moment(currentTime).diff(moment(lastTime), "seconds");
+      if ((cd_time - seconds) <= 0) {
+        await this.clearCD(e)
+        return await e.reply(`派蒙数据库错误，已尝试修复，请重试`, false, { recallMsg: 30 });
+      }
+      return await e.reply(`人家累了，请等待${cd_time - seconds}秒后再使用`, false, { recallMsg: 15 });
+    }
+
+    // 判断权限
     if (!await this._Authentication(e, "sese")) return
     e.reply(Pixiv.startMsg)
     let num = e.msg.match(/\d+/) || 1
+    if (num > 10) {
+      e.reply('嘤嘤嘤，人家累了，给你一张吧QAQ')
+      num = 1
+    }
+
+    // 写入cd---------------------------------------------------------
+    if (num == 1) {
+      currentTime = moment(new Date()).format("YYYY-MM-DD HH:mm:ss");
+      redis.set(`Yz:PaimongLaiFenTuiJianTu:${e.group_id}:${e.user_id}`, currentTime, { EX: cd_time });
+    }
+    else {
+      currentTime = moment(new Date()).format("YYYY-MM-DD HH:mm:ss");
+      redis.set(`Yz:PaimongLaiFenTuiJianTuBatch:${e.group_id}:${e.user_id}`, currentTime, { EX: cd_time_batch });
+    }
+
+    // 执行来份推荐图
     await Pixiv.illustRecommended(num).then(res => res.length == 1
       ? common.recallsendMsg(e, res[0], true)
       : common.recallSendForwardMsg(e, res)
@@ -276,4 +317,17 @@ export class NewPixiv extends plugin {
     }
     return true
   }
+
+  /**
+  * 清除指定用户的cd
+  * @return {*} 
+  */
+  async clearCD(e) {
+    await redis.del(`Yz:PaimongLaiFenTuiJianTu`);
+    await redis.del(`Yz:PaimongLaiFenTuiJianTu:${e.group_id}`);
+    await redis.del(`Yz:PaimongLaiFenTuiJianTu:${e.group_id}:${e.user_id}`);
+    await redis.del(`Yz:PaimongLaiFenTuiJianTuBatch:${e.group_id}:${e.user_id}`);
+    return true;
+  }
+
 }
