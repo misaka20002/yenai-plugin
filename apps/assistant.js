@@ -63,10 +63,10 @@ export class Assistant extends plugin {
           reg: "^#(开启|关闭)戳一戳$",
           fnc: "Cyc"
         },
-        {
-          reg: "^#?撤回$",
-          fnc: "RecallMsgown"
-        },
+        // {
+        //   reg: "^#?撤回$",
+        //   fnc: "RecallMsgown"
+        // },
         {
           reg: "^#(开启|关闭)好友添加$",
           fnc: "FriendSwitch"
