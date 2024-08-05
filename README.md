@@ -1,3 +1,6 @@
+```sh
+git clone -b master --depth=1 https://github.com/misaka20002/yenai-plugin.git ./plugins/yenai-plugin
+```
 > 如果您觉得我们的项目有帮助，请给我们一个星星（Starred）！您的支持对我们非常重要，将激励我们不断改进和提供更好的内容。谢谢！🙏
 
 <img src="resources/img/logo.gif" alt="看板娘" width = "200" align="right">
