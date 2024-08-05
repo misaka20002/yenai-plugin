@@ -123,7 +123,7 @@
   --low-color: rgba(255, 139, 187, 0.856);
   --avatar-main-color: #fff1eb;
   --avatar-similar-color1: #fff1eb;
-  --avatar-similar-color2: #ace0f9;
+  --avatar-similar-color2: rgba(255, 139, 187, 0.856);
 }
 
 .container {
