@@ -269,7 +269,7 @@ body {
   background: var(--blue);
 }
 .botInfo .header table {
-  background: #67abdb;
+  background: rgba(255, 139, 187, 0.856);
   border-radius: 5px;
   box-shadow: #000 1px 1px 3px;
   margin: auto;
