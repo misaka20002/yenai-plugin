@@ -28,9 +28,17 @@ export default async function getBotState(e) {
 
     const botRunTime = formatDuration(Date.now() / 1000 - bot.stat?.start_time, "dd天hh:mm:ss", true)
 
-    const botVersion = version
-      ? `${version.name}${apk ? ` ${version.version}` : ""}`
-      : `ICQQ v${require("icqq/package.json").version}`
+    let botVersion
+    try {
+      botVersion = version
+        ? `${version.name}${apk ? ` ${version.version}` : ""}`
+        : `ICQQ v${require("@icqqjs/icqq/package.json").version}`
+    }
+    catch {
+      botVersion = version
+        ? `${version.name}${apk ? ` ${version.version}` : ""}`
+        : `ICQQ v${require("icqq/package.json").version}`
+    }
 
     return {
       avatar,

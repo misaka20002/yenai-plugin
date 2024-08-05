@@ -14,7 +14,14 @@ export default class ThumbUpApi {
     try {
       let core = this.Bot.icqq?.core
       // eslint-disable-next-line import/no-unresolved
-      if (!core) core = (await import("icqq")).core
+      if (!core) {
+        try {
+          core = (await import("@icqqjs/icqq")).core
+        }
+        catch {
+          core = (await import("icqq")).core
+        }
+      }
       if (times > 20) { times = 20 }
       let ReqFavorite
       if (this.Bot.fl.get(uid)) {
