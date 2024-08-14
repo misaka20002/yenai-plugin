@@ -430,7 +430,7 @@ export class Assistant extends plugin {
     } else {
       source = (await e.friend.getChatHistory(e.source.time, 1)).pop()
     }
-    let target = e.isGroup ? e.group : e.friend
+    let target = e.group ?? e.friend
     // 如果此消息不是bot发送的，则判断#撤回 发送者的权限
     if (source.sender.user_id != this.Bot.uin) {
       if (e.isGroup) {
@@ -454,14 +454,17 @@ export class Assistant extends plugin {
     }
     if (source.message[0].type === 'file' && e.isGroup) {
       // 删除文件
-      logger.info(`${e.logFnc}执行删除文件`)
+      logger.mark(`${e.logFnc}执行删除文件`)
       await this.Bot.acquireGfs(e.group_id).rm(source.message[0].fid)
     } else {
-      // 撤回消息
-      logger.info(`${e.logFnc}执行撤回消息`)
+      /** 撤回消息 */
+      logger.mark(`${e.logFnc}执行撤回消息`)
       await target.recallMsg(source.message_id)
     }
-    await common.sleep(300)
+
+    await sleep(300)
+
+    /** 检验是否撤回成功 */
     let recallcheck = await this.Bot.getMsg(source.message_id)
     if (recallcheck && recallcheck.message_id == source.message_id) {
       let msg
@@ -477,7 +480,8 @@ export class Assistant extends plugin {
       }
       return e.reply(msg, true, { recallMsg: 5 })
     }
-    if (e.isGroup) await e.recall()
+    if (e.isGroup) e.recall()
+    return true
   }
 
   /**
