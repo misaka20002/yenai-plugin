@@ -11,8 +11,9 @@ import PixivApi from "./Pixiv/api.js"
 export default new class Pixiv {
   constructor() {
     this.ranktype = rankType
-    this.domain = "https://hibiapi.dengfenglai.icu/api/pixiv"
+    this.domain = `${Config.pixiv.hibiAPI}/api/pixiv`
     this.PixivClient = new PixivApi(Config.pixiv.refresh_token)
+    this.force_use_PixivApi = Config.pixiv.force_use_PixivApi
   }
 
   async loginInfo() {
@@ -62,7 +63,7 @@ export default new class Pixiv {
   async illust(ids, filter = false) {
     const params = { id: ids }
     let res = null
-    if (this.PixivClient.auth) {
+    if (this.PixivClient.auth && !this.force_use_PixivApi) {
       res = await this.PixivClient.illust(params)
     } else {
       res = await request.get(`${this.domain}/illust`, { params }).then(res => res.json())
@@ -299,7 +300,7 @@ export default new class Pixiv {
     // 关键词搜索
     if (!/^\d+$/.test(keyword)) {
       let wordlist = null
-      if (this.PixivClient.auth) {
+      if (this.PixivClient.auth && !this.force_use_PixivApi) {
         wordlist = await this.PixivClient.search_user({ word: keyword })
       } else {
         wordlist = await request.get(`${this.domain}/search_user`, {
@@ -316,7 +317,7 @@ export default new class Pixiv {
       page
     }
     let res = null
-    if (this.PixivClient.auth) {
+    if (this.PixivClient.auth && !this.force_use_PixivApi) {
       res = await this.PixivClient.member_illust(params)
     } else {
       res = await request.get(`${this.domain}/member_illust`, { params }).then(res => res.json())
@@ -371,7 +372,7 @@ export default new class Pixiv {
       size: 10
     }
     let user = null
-    if (this.PixivClient.auth) {
+    if (this.PixivClient.auth && !this.force_use_PixivApi) {
       user = await this.PixivClient.search_user(params)
     } else {
       user = await request.get(`${this.domain}/search_user`, { params }).then(res => res.json())
@@ -430,7 +431,7 @@ export default new class Pixiv {
   async relatedIllust(pid, isfilter = true) {
     let params = { id: pid }
     let res = null
-    if (this.PixivClient.auth) {
+    if (this.PixivClient.auth && !this.force_use_PixivApi) {
       res = await this.PixivClient.related(params)
     } else {
       res = await request.get(`${this.domain}/related`, { params }).then(res => res.json())

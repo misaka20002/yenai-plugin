@@ -52,19 +52,15 @@ git clone -b master --depth=1 https://github.com/misaka20002/yenai-plugin.git ./
 - 使用github
 
 ```sh
-git clone -b master --depth=1 https://github.com/yeyang52/yenai-plugin.git ./plugins/yenai-plugin
+git clone -b master --depth=1 https://github.com/misaka20002/yenai-plugin.git ./plugins/yenai-plugin
 ```
 
-- 使用gitee
-
-```sh
-git clone -b master --depth=1 https://gitee.com/yeyang52/yenai-plugin.git ./plugins/yenai-plugin
-```
 
 1. 安装依赖(可选：不安装依赖将无法使用一些功能)
 
+
 ```sh
-pnpm install
+pnpm install --filter=yenai-plugin
 ```
 
 ## 功能介绍 📖

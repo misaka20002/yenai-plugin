@@ -210,6 +210,19 @@ export function supportGuoba() {
           component: "Input"
         },
         {
+          field: "pixiv.pixiv_api",
+          label: "pixiv搜图api",
+          bottomHelpMessage: "如果失效自行更换",
+          placeholder: "https://hibiapi.dengfenglai.icu/api/pixiv",
+          component: "Input"
+        },
+        {
+          field: "pixiv.force_use_PixivApi",
+          label: "强制使用搜图api",
+          bottomHelpMessage: "修复输入 Pixiv 登录凭证刷新令牌后的#pid搜图 #uid搜图 #user搜图",
+          component: "Switch"
+        },
+        {
           field: "pixiv.pixivImageProxy",
           label: "pixiv图片反代",
           bottomHelpMessage: "pixiv图片反代服务，如可以直接访问pixiv请直接打开图片直连",
