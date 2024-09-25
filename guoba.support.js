@@ -210,10 +210,12 @@ export function supportGuoba() {
           component: "Input"
         },
         {
-          field: "pixiv.pixiv_api",
+          field: "pixiv.hibiAPI",
           label: "pixiv搜图api",
           bottomHelpMessage: "如果失效自行更换",
-          placeholder: "https://hibiapi.dengfenglai.icu/api/pixiv",
+          componentProps: {
+            placeholder: "https://hibiapi.dengfenglai.icu",
+          },
           component: "Input"
         },
         {
