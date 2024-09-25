@@ -212,7 +212,7 @@ export function supportGuoba() {
         {
           field: "pixiv.hibiAPI",
           label: "pixiv搜图api",
-          bottomHelpMessage: "如果失效自行更换",
+          bottomHelpMessage: "（重启生效）如果失效自行更换",
           componentProps: {
             placeholder: "https://hibiapi.dengfenglai.icu",
           },
@@ -220,7 +220,7 @@ export function supportGuoba() {
         },
         {
           field: "pixiv.force_use_PixivApi",
-          label: "强制使用搜图api",
+          label: "（重启生效）强制使用搜图api",
           bottomHelpMessage: "修复输入 Pixiv 登录凭证刷新令牌后的#pid搜图 #uid搜图 #user搜图",
           component: "Switch"
         },
