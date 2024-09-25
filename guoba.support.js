@@ -206,7 +206,7 @@ export function supportGuoba() {
         {
           field: "pixiv.refresh_token",
           label: "pixiv登录刷新令牌",
-          bottomHelpMessage: "登录后直接使用账号调用官方api，不登录也可以正常使用功能",
+          bottomHelpMessage: "登录后直接使用账号调用官方api，不登录则使用搜图api也可以正常使用功能",
           component: "Input"
         },
         {
@@ -220,8 +220,8 @@ export function supportGuoba() {
         },
         {
           field: "pixiv.force_use_PixivApi",
-          label: "（重启生效）强制使用搜图api",
-          bottomHelpMessage: "修复输入 Pixiv 登录凭证刷新令牌后的#pid搜图 #uid搜图 #user搜图",
+          label: "强制使用搜图api",
+          bottomHelpMessage: "（重启生效）修复输入 Pixiv 登录凭证刷新令牌后的#pid搜图 #uid搜图 #user搜图",
           component: "Switch"
         },
         {
