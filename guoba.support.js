@@ -271,6 +271,15 @@ export function supportGuoba() {
           component: "Input"
         },
         {
+          field: "bika.hibiAPI",
+          label: "bika搜图api",
+          bottomHelpMessage: "（重启生效）如果失效自行更换",
+          componentProps: {
+            placeholder: "https://hibiapi.dengfenglai.icu",
+          },
+          component: "Input"
+        },
+        {
           field: "bika.imageQuality",
           label: "哔咔图片质量",
           bottomHelpMessage: "哔咔返回的图片质量",
