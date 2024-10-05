@@ -23,10 +23,7 @@ statusTask: true
 statusPowerShellStart: false
 
 # 背景图片api，设置为false则一直使用默认背景
-# CF跳板(会损失一点访问时间，但后期API地址可以自动更新)
-# http://dir.dengfenglai.icu
-# 默认地址(直连，但是不确定是否会GG)
-# https://t.mwm.moe/mp/
+# 默认地址 https://t.alcy.cc/mp
 # backdrop: "http://dir.dengfenglai.icu"
 backdrop: "https://api.dujin.org/bing/m.php"
 

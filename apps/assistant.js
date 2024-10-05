@@ -52,7 +52,7 @@ export class Assistant extends plugin {
           fnc: "SetGroupAvatar"
         },
         {
-          reg: "^#改群昵称",
+          reg: "^#改群(昵|名)称?",
           fnc: "SetGroupName"
         },
         {
@@ -423,37 +423,22 @@ export class Assistant extends plugin {
    * @param e
    */
   async RecallMsgown(e) {
-    if (!e.source) return false
-    let source
-    if (e.isGroup) {
-      source = (await e.group.getChatHistory(e.source.seq, 1)).pop()
-    } else {
-      source = (await e.friend.getChatHistory(e.source.time, 1)).pop()
-    }
+    const source = await common.takeSourceMsg(e)
+    if (!source) return false
     let target = e.group ?? e.friend
-    // 如果此消息不是bot发送的，则判断#撤回 发送者的权限
-    if (source.sender.user_id != this.Bot.uin) {
-      if (e.isGroup) {
-        // 群聊判断权限
-        if (!e.isMaster && !(e.member.is_owner || e.sender.role == "owner") && !(e.member.is_admin || e.sender.role == "admin")) {
-          return logger.warn(`${e.logFnc}该群员权限不足`)
-        }
-      } else {
-        // 私聊判断是否为Bot消息
+    let sender = source.sender.user_id
+
+    if (e.isGroup) {
+      /** 群聊判断权限 */
+      if (!common.checkPermission(e, sender == this.Bot.uin ? "all" : "admin")) return logger.warn(`${e.logFnc}该群员权限不足`)
+    } else {
+      /** 私聊判断是否为Bot消息 */
+      if (sender != this.Bot.uin) {
         return logger.warn(`${e.logFnc}引用不是Bot消息`)
       }
     }
-    // 新增：如果此消息是bot发送的，也需要管理员或群主才可以使用撤回
-    else {
-      if (e.isGroup) {
-        // 群聊判断权限
-        if (!e.isMaster && !(e.member.is_owner || e.sender.role == "owner") && !(e.member.is_admin || e.sender.role == "admin")) {
-          return logger.warn(`${e.logFnc}该群员权限不足`)
-        }
-      }
-    }
-    if (source.message[0].type === 'file' && e.isGroup) {
-      // 删除文件
+    if (source.message[0].type === "file" && e.isGroup) {
+      /** 删除文件 */
       logger.mark(`${e.logFnc}执行删除文件`)
       await this.Bot.acquireGfs(e.group_id).rm(source.message[0].fid)
     } else {
@@ -468,15 +453,14 @@ export class Assistant extends plugin {
     let recallcheck = await this.Bot.getMsg(source.message_id)
     if (recallcheck && recallcheck.message_id == source.message_id) {
       let msg
-      const botinfo = await e.bot.getGroupMemberInfo?.(e.group_id, e.self_id) || await e.bot.pickMember?.(e.group_id, e.self_id)
       if (e.isGroup) {
-        if (!(e.group.is_admin || botinfo.role === 'admin' || botinfo.is_admin) && !(e.group.is_owner || botinfo.role === 'owner' || botinfo.is_owner)) {
-          msg = '人家连管理员都木有，怎么撤回两分钟前的消息或别人的消息辣o(´^｀)o'
+        if (!e.group.is_admin && !e.group.is_owner) {
+          msg = "人家连管理员都木有，怎么撤回两分钟前的消息或别人的消息辣o(´^｀)o"
         } else {
-          msg = '干不赢这个淫的辣（｀Δ´）ゞ'
+          msg = "干不赢这个淫的辣（｀Δ´）ゞ"
         }
       } else {
-        msg = '过了两分钟，吃不掉辣(o｀ε´o)'
+        msg = "过了两分钟，吃不掉辣(o｀ε´o)"
       }
       return e.reply(msg, true, { recallMsg: 5 })
     }
@@ -533,6 +517,6 @@ export class Assistant extends plugin {
     if (!common.checkPermission(e, "master")) return
     let model = e.msg.replace(/#设置机型/g, "")
     let res = await new QQApi(e).setModel(model).catch(err => logger.error(err))
-    e.reply(_.get(res, [ "13031", "data", "rsp", "iRet" ]) == 0 ? "设置成功" : "设置失败")
+    e.reply(_.get(res, ["13031", "data", "rsp", "iRet"]) == 0 ? "设置成功" : "设置失败")
   }
 }
