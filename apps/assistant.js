@@ -423,6 +423,19 @@ export class Assistant extends plugin {
    * @param e
    */
   async RecallMsgown(e) {
+    // 适配trss，这d玩意没有source
+    if (e.reply_id && e.isMaster) {
+      if (e.group?.recallMsg) {
+        e.group.recallMsg(e.reply_id)
+        e.group.recallMsg(e.message_id)
+      } else if (e.friend?.recallMsg) {
+        e.friend.recallMsg(e.reply_id)
+        e.friend.recallMsg(e.message_id)
+      }
+      return false
+    }
+
+    // 原生ICQQ
     if (!e.source) return false
     let source
     if (e.isGroup) {
@@ -430,9 +443,9 @@ export class Assistant extends plugin {
     } else {
       source = (await e.friend.getChatHistory(e.source.time, 1)).pop()
     }
-    let target = e.group ?? e.friend
+    let target = e.isGroup ? e.group : e.friend
     // 如果此消息不是bot发送的，则判断#撤回 发送者的权限
-    if (source.sender.user_id != this.Bot.uin) {
+    if (source.sender.user_id != e.self_id) {
       if (e.isGroup) {
         // 群聊判断权限
         if (!e.isMaster && !(e.member.is_owner || e.sender.role == "owner") && !(e.member.is_admin || e.sender.role == "admin")) {
@@ -454,18 +467,15 @@ export class Assistant extends plugin {
     }
     if (source.message[0].type === 'file' && e.isGroup) {
       // 删除文件
-      logger.mark(`${e.logFnc}执行删除文件`)
-      await this.Bot.acquireGfs(e.group_id).rm(source.message[0].fid)
+      logger.info(`${e.logFnc}执行删除文件`)
+      await e.bot.acquireGfs(e.group_id).rm(source.message[0].fid)
     } else {
-      /** 撤回消息 */
-      logger.mark(`${e.logFnc}执行撤回消息`)
+      // 撤回消息
+      logger.info(`${e.logFnc}执行撤回消息`)
       await target.recallMsg(source.message_id)
     }
-
-    await sleep(300)
-
-    /** 检验是否撤回成功 */
-    let recallcheck = await this.Bot.getMsg(source.message_id)
+    await sleep_pai(300)
+    let recallcheck = await e.bot.getMsg(source.message_id)
     if (recallcheck && recallcheck.message_id == source.message_id) {
       let msg
       const botinfo = await e.bot.getGroupMemberInfo?.(e.group_id, e.self_id) || await e.bot.pickMember?.(e.group_id, e.self_id)
@@ -480,8 +490,7 @@ export class Assistant extends plugin {
       }
       return e.reply(msg, true, { recallMsg: 5 })
     }
-    if (e.isGroup) e.recall()
-    return true
+    if (e.isGroup) await e.recall()
   }
 
   /**
