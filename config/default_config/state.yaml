@@ -30,7 +30,6 @@ monitor:
 
 # 背景图片api，设置为false则一直使用默认背景
 # 默认地址 https://t.alcy.cc/mp
-# backdrop: "http://dir.dengfenglai.icu"
 backdrop: "https://api.dujin.org/bing/m.php"
 
 # 当api请求失败时使用的默认背景图，请放置在resources/state/img/bg目录下
