@@ -69,7 +69,13 @@ export default new class Pixiv {
   async illust(ids, filter = false) {
     const params = { id: ids }
     let res = await this.PixivClient.illust(params)
-    if (res.error) throw new ReplyError(res.error?.user_message || "无法获取数据")
+    if (res.error) {
+      if (res.error?.user_message === "ページが見つかりませんでした") {
+        throw new ReplyError("❎ 页面未找到，请检查插画ID是否正确")
+      } else {
+        throw new ReplyError(res.error?.user_message || "无法获取数据")
+      }
+    }
     let illust = this._format(res.illust)
     let { id, title, user, tags, total_bookmarks, total_view, url, create_date, x_restrict, illust_ai_type } = illust
     let msg = [
@@ -79,7 +85,7 @@ export default new class Pixiv {
       `UID：${user.id}\n`,
       `点赞：${total_bookmarks}\n`,
       `访问：${total_view}\n`,
-      `isAI：${illust_ai_type == 2}\n`,
+      `isAI：${illust_ai_type == 2 || tags.some(tag => /AI/i.test(tag))}\n`,
       `发布：${moment(create_date).format("YYYY-MM-DD HH:mm:ss")}\n`,
       `Tag：${tags.join("，")}\n`,
       `直链：https://pixiv.re/${id}.jpg\n`,
