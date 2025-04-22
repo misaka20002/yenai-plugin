@@ -85,7 +85,7 @@ export default new class Pixiv {
       `UID：${user.id}\n`,
       `点赞：${total_bookmarks}\n`,
       `访问：${total_view}\n`,
-      `isAI：${illust_ai_type == 2 || tags.some(tag => /AI/i.test(tag))}\n`,
+      `isAI：${illust_ai_type == 2 ? "是" : (tags.some(tag => /AI/i.test(tag)) ? "疑似" : "否")}\n`,
       `发布：${moment(create_date).format("YYYY-MM-DD HH:mm:ss")}\n`,
       `Tag：${tags.join("，")}\n`,
       `直链：https://pixiv.re/${id}.jpg\n`,
