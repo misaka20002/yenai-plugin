@@ -15,6 +15,9 @@ hibiAPI: https://hibi.Yunzai-Bot.com
 
 # Pixiv 登录凭证刷新令牌 (Refresh Token)
 # 获取方法请参考: https://github.com/mixmoe/HibiAPI/issues/53
-refresh_token: 
+refresh_token:
 
 language: zh-cn # 返回语言, 会影响标签的翻译
+
+# 发送图片质量, 可选值: large, medium, square_medium, original
+sendImgQuality: original

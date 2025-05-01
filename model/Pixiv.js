@@ -11,7 +11,8 @@ import hibiApi from "./Pixiv/hibiApi.js"
 export default new class Pixiv {
   constructor() {
     this.ranktype = rankType
-    this._PixivClient = Config.pixiv.refresh_token && new PixivApi(Config.pixiv.refresh_token)
+    this.Config = Config.pixiv
+    this._PixivClient = this.Config.refresh_token && new PixivApi(this.Config.refresh_token)
   }
 
   get PixivClient() {
@@ -40,7 +41,7 @@ export default new class Pixiv {
   }
 
   get headers() {
-    if (Config.pixiv.pixivDirectConnection) {
+    if (this.Config.pixivDirectConnection) {
       return {
         "Host": "i.pximg.net",
         "Referer": "https://www.pixiv.net/",
@@ -52,7 +53,7 @@ export default new class Pixiv {
   }
 
   get proxy() {
-    return Config.pixiv.pixivDirectConnection ? "i.pximg.net" : Config.pixiv.pixivImageProxy
+    return this.Config.pixivDirectConnection ? "i.pximg.net" : this.Config.pixivImageProxy
   }
 
   /** 开始执行文案 */
@@ -515,14 +516,22 @@ export default new class Pixiv {
    * visible  是否为可见作品
    */
   _format(illusts) {
-    let url = []
-    let { tags, meta_single_page, meta_pages } = illusts
+    let { tags } = illusts
     tags = _.uniq(_.compact(_.flattenDeep(tags?.map(item => Object.values(item)))))
-    if (!_.isEmpty(meta_single_page)) {
-      url.push(meta_single_page.original_image_url)
-    } else {
-      url = meta_pages.map(item => item.image_urls.original)
-    }
+    let url = this._getImg(illusts)
     return { ...illusts, tags, url }
+  }
+
+  _getImg(data) {
+    const { meta_single_page, meta_pages, page_count, image_urls } = data
+    let url = []
+    if (page_count > 1) {
+      url = meta_pages.map(item => item.image_urls)
+    } else {
+      image_urls.original = meta_single_page.original_image_url
+      url = [ image_urls ]
+    }
+    console.log(url)
+    return url.map(item => item[this.Config.sendImgQuality])
   }
 }()
