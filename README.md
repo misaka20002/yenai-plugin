@@ -36,13 +36,7 @@
 - 使用 github
 
 ```sh
-git clone -b v2 --depth=1 https://github.com/yeyang52/yenai-plugin.git ./plugins/yenai-plugin
-```
-
-- 使用 gitee
-
-```sh
-git clone -b v2 --depth=1 https://gitee.com/yeyang52/yenai-plugin.git ./plugins/yenai-plugin
+git clone -b v2 --depth=1 https://github.com/misaka20002/yenai-plugin.git ./plugins/yenai-plugin
 ```
 
 2. 安装依赖

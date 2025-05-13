@@ -46,7 +46,7 @@ export default class ThumbUpApi {
 
   async origThumbUp(uid, times) {
     const friend = this.Bot.pickFriend(uid)
-    if (!friend?.thumbUp) throw new ReplyError("当前协议端不支持点赞，详情查看\nhttps://gitee.com/TimeRainStarSky/Yunzai")
+    if (!friend?.thumbUp) throw new ReplyError("当前协议端不支持点赞，详情查看\nhttps://github.com/TimeRainStarSky/Yunzai")
     let res
     try {
       res = await friend.thumbUp(times)

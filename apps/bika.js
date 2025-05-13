@@ -5,14 +5,14 @@ import translateChinaNum from "../tools/translateChinaNum.js"
 
 // 汉字数字匹配正则
 const numReg = "[零一壹二两三四五六七八九十百千万亿\\d]+"
-const Prefix = "(bika|哔咔)"
+const Prefix = "(派蒙bika|派蒙哔咔)"
 // 命令正则
 const searchReg = new RegExp(`^#?${Prefix}(类别|作者|高级)?搜索(.*?)(第(${numReg})页)?$`)
 const comicPageReg = new RegExp(`^#?${Prefix}id(.*?)(第(${numReg})页)?(第(${numReg})话)?$`)
 export class NewBika extends plugin {
   constructor() {
     super({
-      name: "椰奶哔咔",
+      name: "派蒙哔咔",
       event: "message",
       priority: 2000,
       rule: [

@@ -17,7 +17,7 @@ body:
       options:
         - label: 我已确认使用的是最新版本的 Yenai-Plugin
           required: true
-        - label: 我已搜索过[现有 issues](https://gitee.com/yeyang52/yenai-plugin/issues)，确认没有重复问题
+        - label: 我已搜索过[现有 issues](https://github.com/misaka20002/yenai-plugin/issues)，确认没有重复问题
           required: true
 
   - type: dropdown
