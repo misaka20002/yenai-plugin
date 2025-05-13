@@ -115,9 +115,9 @@ style:
   # default_bg.jpg 可直接指定bg目录里一张图片，注意请带上后缀名
   backdropDefault: "random"
   # Bot昵称的颜色
-  # 支持渐变色请以gradient:开头 如 gradient:271.14deg,#001bff 0.98%,#00f0ff 25.79%,#fce84a 47.33%,#f34628 65.77%,#b275ff 91.4%
+  # 支持渐变色请以gradient:开头 如 gradient:271.14deg,#001bff 0.98%,#00f0ff 25.79%,#fce84a 47.33%,#f34628 65.77%,#b275ff 91.4%  # 渐变色有bug
   # BotNameColor: "#000"
-  BotNameColor: "gradient:271.14deg,#001bff 0.98%,#00f0ff 25.79%,#fce84a 47.33%,#f34628 65.77%,#b275ff 91.4%"
+  BotNameColor: "rgba(235, 50, 180, 0.856)"
   #主硬件进度条和磁盘进度条的颜色
   progressBarColor:
     # high: "#d73403"
