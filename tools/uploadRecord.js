@@ -12,9 +12,11 @@ let core = null
 let Contactable = null
 
 try {
-  Contactable = (await import("icqq"))?.default
-  core = (await import("icqq"))?.core
+  Contactable = (await import('icqq')).default
+  core = (await import('icqq')).core
 } catch (error) {
+  Contactable = (await import('@icqqjs/icqq').catch(() => { }))?.default
+  core = (await import('@icqqjs/icqq').catch(() => { }))?.core
 }
 
 /**
