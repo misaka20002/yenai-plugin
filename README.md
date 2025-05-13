@@ -85,7 +85,7 @@ pnpm install --filter=yenai-plugin
 - [x] Bot被禁言
 
 Tip：具体可使用 **#椰奶设置** 查看
-  </details>
+</details>
 
 <details>
   <summary>助手功能</summary>
@@ -106,6 +106,7 @@ Tip：具体可使用 **#椰奶设置** 查看
 
 
 </details>
+
 <details>
   <summary>事件处理</summary>
 
@@ -125,6 +126,7 @@ Tip：具体可使用 **#椰奶设置** 查看
   
 
 </details>
+
 <details>
   <summary>娱乐功能</summary>
 
@@ -137,10 +139,11 @@ Tip：具体可使用 **#椰奶设置** 查看
 - [x] 支付宝到账语音
 
 </details>
-<details>
-  <summary>Pixiv功能</summary>
 
-- [x] Pixiv排行榜
+<details>
+  <summary>P站功能</summary>
+
+- [x] P站排行榜
 
 - [x] Tag搜图
 
@@ -211,7 +214,7 @@ Tip：具体可使用 **#椰奶群管帮助** 查看
   <summary>哔咔功能</summary>
 
 - [x] 哔咔搜索
-- [x] 哔咔看本子
+- [x] 哔咔看本
 
 </details>
 
@@ -226,6 +229,7 @@ Tip：具体可使用 **#椰奶群管帮助** 查看
 <img src="resources/img/statePro.jpg" alt="状态" width = "300" />
 
 </details>
+
 <br>
 
 更多信息请移步[文档](https://yenai.trss.me)
@@ -245,7 +249,7 @@ Tip：具体可使用 **#椰奶群管帮助** 查看
 ### 贡献者 ✨
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-15-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-17-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 感谢这些了不起的人 ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
 
@@ -274,6 +278,8 @@ Tip：具体可使用 **#椰奶群管帮助** 查看
     </tr>
     <tr>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/ifeif"><img src="https://avatars.githubusercontent.com/u/36729028?v=4?s=100" width="100px;" alt="ifeif"/><br /><sub><b>ifeif</b></sub></a><br /><a href="https://github.com/yeyang52/yenai-plugin/commits?author=ifeif" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/Jin1c-3"><img src="https://avatars.githubusercontent.com/u/126029323?v=4?s=100" width="100px;" alt="青青"/><br /><sub><b>青青</b></sub></a><br /><a href="https://github.com/yeyang52/yenai-plugin/commits?author=Jin1c-3" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/KBVsent"><img src="https://avatars.githubusercontent.com/u/137363396?v=4?s=100" width="100px;" alt="時壹"/><br /><sub><b>時壹</b></sub></a><br /><a href="https://github.com/yeyang52/yenai-plugin/commits?author=KBVsent" title="Code">💻</a></td>
     </tr>
   </tbody>
 </table>

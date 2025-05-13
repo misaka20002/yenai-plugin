@@ -20,7 +20,7 @@ export class Assistant extends plugin {
           fnc: "SetAvatar"
         },
         {
-          reg: "^#(改|换)昵称",
+          reg: "^#(改|换)(昵|名)称?",
           fnc: "SetNickname"
         },
         {
@@ -52,7 +52,7 @@ export class Assistant extends plugin {
           fnc: "SetGroupAvatar"
         },
         {
-          reg: "^#改群昵称",
+          reg: "^#改群(昵|名)称?",
           fnc: "SetGroupName"
         },
         {
@@ -138,7 +138,7 @@ export class Assistant extends plugin {
    */
   async SetNickname(e) {
     if (!common.checkPermission(e, "master")) return
-    let name = e.msg.replace(/#(改|换)昵称/g, "").trim()
+    let name = e.msg.replace(/#(改|换)(昵|名)称?/g, "").trim()
 
     await this.Bot.setNickname(name)
       .then(() => e.reply("✅ 昵称修改成功"))
@@ -256,7 +256,7 @@ export class Assistant extends plugin {
     } else {
       if (!e.member.is_admin && !e.member.is_owner && !e.isMaster) return logger.mark(`${e.logFnc}该群员权限不足`)
       group = e.group_id
-      card = e.msg.replace(/#改群昵称/g, "").trim()
+      card = e.msg.replace(/#改群(昵|名)称?/g, "").trim()
     }
 
     if (!card) return e.reply("❎ 昵称不能为空")
@@ -423,23 +423,17 @@ export class Assistant extends plugin {
    * @param e
    */
   async RecallMsgown(e) {
-    if (!e.source) return false
-    let source
-    if (e.isGroup) {
-      source = (await e.group.getChatHistory(e.source.seq, 1)).pop()
-    } else {
-      source = (await e.friend.getChatHistory(e.source.time, 1)).pop()
-    }
+    const source = await common.takeSourceMsg(e)
+    if (!source) return false
     let target = e.group ?? e.friend
-    // 如果此消息不是bot发送的，则判断#撤回 发送者的权限
-    if (source.sender.user_id != this.Bot.uin) {
-      if (e.isGroup) {
-        // 群聊判断权限
-        if (!e.isMaster && !(e.member.is_owner || e.sender.role == "owner") && !(e.member.is_admin || e.sender.role == "admin")) {
-          return logger.warn(`${e.logFnc}该群员权限不足`)
-        }
-      } else {
-        // 私聊判断是否为Bot消息
+    let sender = source.sender.user_id
+
+    if (e.isGroup) {
+      /** 群聊判断权限 */
+      if (!common.checkPermission(e, sender == this.Bot.uin ? "all" : "admin")) return logger.warn(`${e.logFnc}该群员权限不足`)
+    } else {
+      /** 私聊判断是否为Bot消息 */
+      if (sender != this.Bot.uin) {
         return logger.warn(`${e.logFnc}引用不是Bot消息`)
       }
     }
