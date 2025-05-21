@@ -1,4 +1,5 @@
 import fs from "fs"
+
 export default [
   {
     component: "SOFT_GROUP_BEGIN",
@@ -8,6 +9,12 @@ export default [
     field: "state.defaultState",
     label: "默认状态",
     bottomHelpMessage: "将椰奶状态作为Yunzai默认状态",
+    component: "Switch"
+  },
+  {
+    field: "state.noPro",
+    label: "禁用pro状态",
+    bottomHelpMessage: "关闭椰奶状态Pro",
     component: "Switch"
   },
   {

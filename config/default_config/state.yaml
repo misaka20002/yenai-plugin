@@ -1,5 +1,7 @@
 # 设置为默认状态
 defaultState: false
+# 禁用状态Pro
+noPro: false
 
 # 网络测试
 psTestSites:
