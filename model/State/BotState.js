@@ -1,6 +1,7 @@
 import { createRequire } from "module"
 import moment from "moment"
-import { Plugin_Path } from "../../components/index.js"
+import { Plugin_Path, Config } from "#yenai.components"
+import request from "#yenai.request"
 import { formatDuration } from "../../tools/index.js"
 // import { getImgPalette } from "./utils.js"
 const require = createRequire(import.meta.url)
@@ -52,8 +53,12 @@ async function getAvatarColor(url) {
   try {
     if (url == "default") {
       url = defaultAvatar
+    } else if (Config.state.avatarDownloader) {
+      const buffBase64 = await request.get(url, {
+        responseType: "arrayBuffer"
+      })
+      url = `data:image/jpeg;base64,${Buffer.from(buffBase64).toString("base64")}`
     }
-    // let avatar = await getImgPalette(url)
     return {
       path: url
     }

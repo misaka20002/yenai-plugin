@@ -18,6 +18,12 @@ export default [
     component: "Switch"
   },
   {
+    field: "state.avatarDownloader",
+    label: "启用头像预加载",
+    bottomHelpMessage: "开启后使用内置下载器获取Bot头像，可配置代理使用",
+    component: "Switch"
+  },
+  {
     field: "state.showFastFetch",
     label: "fastFetch显示模式",
     component: "RadioGroup",
