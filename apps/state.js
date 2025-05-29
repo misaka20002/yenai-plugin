@@ -8,7 +8,7 @@ export class NewState extends plugin {
     super({
       name: "椰奶状态",
       event: "message",
-      priority: -Infinity,
+      priority: -114514,
       rule: [
         {
           reg: "^#?(椰奶)?状态(pro)?(debug)?$",
@@ -38,6 +38,7 @@ export class NewState extends plugin {
 
   async state(e) {
     if (!/椰奶/.test(e.msg) && !Config.state.defaultState) return false
+    if (e.msg.includes("pro") && Config.state.noPro) return false
 
     // 防止多次触发
     if (interval) { return false } else interval = true

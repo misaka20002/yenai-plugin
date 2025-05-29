@@ -1,5 +1,10 @@
 # 设置为默认状态
 defaultState: false
+# 禁用状态Pro
+noPro: false
+
+# 是否使用内置下载器获取机器人头像
+avatarDownloader: false
 
 # 网络测试
 psTestSites:
@@ -82,6 +87,7 @@ closedChart: false
 # pro - 只有状态pro显示
 # default - win默认只有pro显示，liunx等其他正常也会显示
 showFastFetch: default
+
 
 # 是否显示redis信息 可选参数:true, false, pro
 # true - 全部显示
