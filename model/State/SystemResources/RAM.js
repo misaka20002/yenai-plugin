@@ -1,6 +1,11 @@
 import si from "systeminformation"
 import { getFileSize } from "../utils.js"
 import { Circle } from "./index.js"
+let memLayout = null;
+(async() => {
+  memLayout = await si.memLayout()
+})()
+
 /** 获取当前内存占用 */
 export default async function getMemUsage() {
   const { mem: { total, used, active, buffcache } } = await si.get({
@@ -21,6 +26,7 @@ export default async function getMemUsage() {
     percentage: activePercentage,
     inner: `${Math.round(activePercentage * 100)}%`,
     title: "RAM",
+    detailed: memLayout[0].clockSpeed ? `${memLayout[0].clockSpeed}MHz` : false,
     info: [
         `${activeMem} / ${totalMem}`,
         isBuff ? `缓冲区/缓存 ${buffcacheMem}` : ""

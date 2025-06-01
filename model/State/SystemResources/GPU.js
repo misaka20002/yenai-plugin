@@ -25,7 +25,7 @@ export default async function getGPU() {
       return false
     }
     let {
-      vendor, temperatureGpu, utilizationGpu,
+      vendor, model, temperatureGpu, utilizationGpu,
       memoryTotal, memoryUsed /* powerDraw */
     } = graphics
     temperatureGpu && (temperatureGpu = temperatureGpu + "℃")
@@ -34,6 +34,7 @@ export default async function getGPU() {
       percentage: utilizationGpu / 100,
       inner: Math.round(utilizationGpu) + "%",
       title: "GPU",
+      detailed: model,
       info: [
         `${(memoryUsed / 1024).toFixed(2)} GB / ${(memoryTotal / 1024).toFixed(2)} GB`,
         `${vendor} ${temperatureGpu}`

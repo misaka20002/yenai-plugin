@@ -9,7 +9,7 @@ export default async function getCpuInfo() {
     currentLoad: "currentLoad",
     fullLoad: "*"
   })
-  let { manufacturer, speed, cores } = cpu ?? {}
+  let { manufacturer, speed, cores, brand } = cpu ?? {}
   if (currentLoad == null || currentLoad == undefined) return false
   fullLoad = Math.round(fullLoad)
   manufacturer = manufacturer?.split(" ")?.[0] ?? "unknown"
@@ -17,6 +17,7 @@ export default async function getCpuInfo() {
     percentage: currentLoad / 100,
     inner: Math.round(currentLoad) + "%",
     title: "CPU",
+    detailed: brand,
     info: [
         `${manufacturer} ${cores}核 ${speed}GHz`,
         `CPU满载率 ${fullLoad}%`

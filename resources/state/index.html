@@ -89,6 +89,9 @@
             </div>
             <article>
                 <summary>{{group.title}}</summary>
+                {{if group.detailed}}
+                <div class="detailed">{{group.detailed}}</div>
+                {{/if}}
                 {{each group.info info}}
                 <p>{{info}}</p>
                 {{/each}}
