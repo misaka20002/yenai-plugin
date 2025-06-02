@@ -224,6 +224,15 @@ li {
   font-size: 17px;
   color: #494d53;
 }
+.box[data-boxInfo=进程负载] .process .form .header-row .cell[data-sort=true] {
+  position: relative;
+}
+.box[data-boxInfo=进程负载] .process .form .header-row .cell[data-sort=true]::after {
+  content: "▼";
+  position: absolute;
+  margin-left: 5px;
+  color: #494d53;
+}
 .box[data-boxInfo=进程负载] .process .form .cell {
   flex: 1;
   padding: 5px;
