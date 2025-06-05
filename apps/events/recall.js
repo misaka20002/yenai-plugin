@@ -51,7 +51,7 @@ Bot.on?.("notice.group.recall", async(e) => {
     special = msgType.type
   } else {
     // 正常处理
-    forwardMsg = await bot.makeForwardMsg([
+    forwardMsg = await Bot.makeForwardMsg([
       {
         message: rawMsg,
         nickname: e.group.pickMember(e.user_id).card,
