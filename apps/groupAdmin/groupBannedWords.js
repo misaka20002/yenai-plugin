@@ -81,7 +81,7 @@ export class GroupBannedWords extends plugin {
     if (_.isEmpty(bannedWords)) {
       return false
     }
-    
+
     const trimmedKeyWord = this.#trimAlias(this.message)
     let data = null
     for (const [ k, v ] of bannedWords) {
