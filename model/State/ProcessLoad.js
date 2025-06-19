@@ -13,7 +13,7 @@ export default async function(e) {
       i.list = i.list.filter(i => !filterList.includes(i.name))
       return i
     })
-
+    ps.order = " " + showMax.order
     const result = []
     if (showMax.show) {
       switch (showMax.order) {

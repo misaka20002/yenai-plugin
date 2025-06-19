@@ -66,7 +66,7 @@ processLoad:
     # cpu - 以cpu占用进行排序显示
     # mem - 以mem占用进行排序显示
     # cpu_mem - cpu占用和mem占用最多的各显示一半
-    order: cpu_mem
+    order: mem
   # 进程名
   list:
     - node
@@ -87,7 +87,6 @@ closedChart: false
 # pro - 只有状态pro显示
 # default - win默认只有pro显示，liunx等其他正常也会显示
 showFastFetch: default
-
 
 # 是否显示redis信息 可选参数:true, false, pro
 # true - 全部显示
