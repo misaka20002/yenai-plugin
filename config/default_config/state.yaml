@@ -20,13 +20,13 @@ psTestSites:
     - name: Baidu
       url: https://baidu.com
       useProxy: false
+    - name: Github
+      url: https://github.com
+      useProxy: true
     - name: Google
       url: https://google.com
       useProxy: true
-    - name: github
-      url: https://github.com
-      useProxy: true
-    - name: cloudflare
+    - name: Cloudflare
       url: https://cloudflare.com
       useProxy: true
   # 测试超时时间
