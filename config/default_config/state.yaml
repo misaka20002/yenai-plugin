@@ -23,6 +23,12 @@ psTestSites:
     - name: Google
       url: https://google.com
       useProxy: true
+    - name: github
+      url: https://github.com
+      useProxy: true
+    - name: cloudflare
+      url: https://cloudflare.com
+      useProxy: true
   # 测试超时时间
   timeout: 5000
   # 并发数量
