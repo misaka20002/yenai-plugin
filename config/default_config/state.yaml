@@ -29,6 +29,9 @@ psTestSites:
     - name: Cloudflare
       url: https://cloudflare.com
       useProxy: true
+    - name: hf.space
+      url: https://hf.space
+      useProxy: true
   # 测试超时时间
   timeout: 5000
   # 并发数量
