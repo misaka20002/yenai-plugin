@@ -104,6 +104,7 @@ export class Fun extends plugin {
       // const [user, repo] = [res[1], res[2].split('#')[0]]
       // e.reply(segment.image(`${api}/${id}/${user}/${repo}`))
     }
+    return false;
   }
 
   /**
