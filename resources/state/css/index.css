@@ -40,6 +40,7 @@
   top: 50%;
   transform: translate(-50%, -50%);
   color: var(--text-color);
+  font-weight: 700;
 }
 .mainHardware .circle-outer {
   position: relative;
@@ -104,6 +105,7 @@
 .mainHardware article summary {
   font-size: 22px;
   margin-top: 5px;
+  font-weight: 700;
 }
 .mainHardware article .detailed {
   font-size: 12px;
@@ -143,6 +145,7 @@ body {
   height: 100%;
   flex-direction: column;
   justify-content: space-around;
+  color: #000;
 }
 
 .container {
@@ -171,7 +174,6 @@ li {
 }
 .box:not(.clear-style) {
   border-radius: 18px;
-  font-weight: 700;
   background: rgba(255, 255, 255, 0.45);
   box-shadow: 0 8px 32px 0 rgba(51, 51, 52, 0.5), inset 3px 3px 10px 0px rgba(255, 255, 255, 0.8);
   -webkit-backdrop-filter: blur(10px);
@@ -186,13 +188,7 @@ li {
   font-size: 11px;
   color: #0e0e0e;
   text-shadow: 1px 1px 2px #fff;
-}
-.box.fastFetch {
-  font-size: 16px;
-}
-.box.fastFetch .speed {
-  line-height: 22px;
-  height: 22px;
+  font-weight: 700;
 }
 
 .box[data-boxInfo=进程负载] .title {
@@ -213,8 +209,9 @@ li {
 .box[data-boxInfo=进程负载] .info .list {
   display: flex;
   justify-content: space-around;
-  margin: 10px 0;
+  margin: 10px;
   font-size: 17px;
+  gap: 20px;
 }
 .box[data-boxInfo=进程负载] .info .list div {
   border: 1px solid rgba(180, 180, 182, 0.67);
@@ -222,6 +219,7 @@ li {
   padding: 5px 10px;
   color: #4f5255;
   background-color: rgba(244, 244, 245, 0.58);
+  flex: 1;
 }
 .box[data-boxInfo=进程负载] .process .title {
   margin: 10px 0;
@@ -230,6 +228,7 @@ li {
   display: flex;
   flex-direction: column;
   font-size: 16px;
+  margin: 0px 10px;
 }
 .box[data-boxInfo=进程负载] .process .form .row {
   display: flex;
@@ -272,8 +271,10 @@ li {
   margin-right: 5px;
 }
 .box[data-boxInfo=redis] .info {
-  display: flex;
-  gap: 20px;
+  display: grid;
+  gap: 10px 20px;
+  grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+  white-space: nowrap;
 }
 .box[data-boxInfo=redis] .info .redisBox {
   flex: 1;
@@ -293,6 +294,7 @@ li {
 }
 .box[data-boxInfo=redis] .info .redisBox .data .item .number {
   color: #46971d;
+  font-weight: 700;
 }
 .box[data-boxInfo=redis] .keyspace {
   margin-top: 10px;
@@ -485,27 +487,32 @@ li {
 }
 
 .speed {
-  width: 100%;
   display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 30px;
   height: 25px;
-  line-height: 25px;
+  padding: 0px 10px;
+  font-size: 16px;
+  line-height: 1;
+}
+.speed p {
+  margin: 0;
 }
 .speed p:first-child {
-  flex-grow: 1;
-  flex-shrink: 0;
-  max-width: 50%;
-  text-align: left;
-  margin-right: 20px;
+  flex: 0 0 32%;
+  max-width: 32%;
 }
 .speed p:last-child {
-  flex-grow: 1;
-  flex-shrink: 1;
-  margin-left: 20px;
+  flex: 1 1 68%;
   text-align: right;
+  font-weight: 700;
+  color: #333;
 }
 .speed p img {
-  height: 100%;
-  vertical-align: sub;
+  vertical-align: middle;
+  height: 14px;
+  margin-right: 6px;
 }
 
 .copyright.abs {
@@ -515,4 +522,134 @@ li {
   transform: translateX(-50%);
   width: -moz-max-content;
   width: max-content;
+}
+
+.box[data-boxInfo=其他] {
+  --border-color: rgba(68, 68, 68, 0.67);
+  --interval: 10px;
+}
+.box[data-boxInfo=其他] .title {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  padding-top: 5px;
+  border-bottom: 2px solid rgba(180, 180, 182, 0.6745098039);
+  margin-bottom: var(--interval);
+  border-bottom: 1px solid var(--border-color);
+}
+.box[data-boxInfo=其他] .title .icon {
+  width: 20px;
+  height: 20px;
+  margin-right: 7px;
+}
+.box[data-boxInfo=其他] .speed {
+  margin: 0px 10px;
+  padding: 0px 5px;
+  margin-bottom: var(--interval);
+  padding-bottom: var(--interval);
+  border-bottom: 1px dashed var(--border-color);
+  font-size: 16px;
+}
+
+.box[data-boxInfo=网络] .title {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  padding-top: 5px;
+  border-bottom: 2px solid rgba(180, 180, 182, 0.6745098039);
+  margin-bottom: 10px;
+}
+.box[data-boxInfo=网络] .title .icon {
+  width: 20px;
+  height: 20px;
+  margin-right: 7px;
+}
+.box[data-boxInfo=网络] .networkInfo .chartBox,
+.box[data-boxInfo=网络] .networkInfo .data > div {
+  border: 1px solid rgba(180, 180, 182, 0.67);
+  background-color: rgba(244, 244, 245, 0.58);
+}
+.box[data-boxInfo=网络] .networkInfo .chartBox {
+  padding: 5px 10px;
+  margin: 20px;
+  border-radius: 10px;
+}
+.box[data-boxInfo=网络] .networkInfo .data {
+  display: grid;
+  margin: 20px;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  white-space: nowrap;
+}
+.box[data-boxInfo=网络] .networkInfo .data > div {
+  border-radius: 5px;
+  padding: 7px;
+  display: flex;
+  align-items: center;
+}
+.box[data-boxInfo=网络] .networkInfo .data > div .icon {
+  width: 30px;
+  height: 30px;
+  margin-right: 10px;
+}
+.box[data-boxInfo=网络] .networkInfo .data > div .icon img {
+  width: 100%;
+  height: 100%;
+}
+.box[data-boxInfo=网络] .networkInfo .data > div .info {
+  font-size: 13px;
+}
+.box[data-boxInfo=网络] .networkInfo .data > div .info .text {
+  color: #696d70;
+  margin-bottom: 3px;
+}
+.box[data-boxInfo=网络] .networkInfo .data > div .info .networkData {
+  font-size: 15px;
+  font-weight: 700;
+}
+.box[data-boxInfo=网络] .networkInfo .data > div .info .networkData .unit {
+  color: #696d70;
+  font-weight: 500;
+  font-size: 12px;
+}
+.box[data-boxInfo=网络] .psTest .data {
+  display: flex;
+  flex-direction: column;
+  font-size: 17px;
+  margin: 0px 20px;
+  margin-bottom: 10px;
+}
+.box[data-boxInfo=网络] .psTest .data .row {
+  display: flex;
+  flex: 1;
+}
+.box[data-boxInfo=网络] .psTest .data .header-row {
+  font-size: 18px;
+  color: #494d53;
+}
+.box[data-boxInfo=网络] .psTest .data .cell {
+  flex: 1;
+  padding: 5px;
+  text-align: center;
+}
+.box[data-boxInfo=网络] .psTest .data .cell:first-child {
+  flex: 3;
+  text-align: left;
+}
+
+/* 新增：fastFetch 模块内部条目样式（仅新增，不改动盒子样式） */
+.box[data-boxInfo=FastFetch] .speed {
+  padding: 6px 10px;
+  /* 使条目更紧凑 */
+  min-height: 28px;
+  font-size: 13px;
+  /* 在条目较多时，减少视觉冗余 */
+}
+.box[data-boxInfo=FastFetch] .speed:last-child {
+  border-bottom: none;
+}
+
+.title,
+.header-row {
+  font-weight: 700;
 }/*# sourceMappingURL=index.css.map */
