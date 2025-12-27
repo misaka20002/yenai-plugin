@@ -428,7 +428,14 @@ export default class GroupAdmin {
 
       if (isWhite && !isMaster && time != 0) throw new ReplyError(`❎ ${isMore ? id : "该用户"}为白名单成员，不可操作`)
 
-      await group.muteMember(id, time * _unit)
+      try {
+        await group.muteMember(id, time * _unit)
+      } catch (err) {
+        if (err.message?.includes("NOT_GROUP_ADMIN") || err.message?.includes("权限不足")) {
+          throw new ReplyError("❎ 权限不足，Bot需要管理员权限")
+        }
+        throw err
+      }
       const memberName = Memberinfo.card || Memberinfo.nickname || id
       return memberName
     }
@@ -484,7 +491,15 @@ export default class GroupAdmin {
 
       if (isWhite && !isMaster) throw new ReplyError(`❎ ${isMore ? id : "该用户"}是白名单成员，不可操作`)
 
-      const res = await group.kickMember(id, block)
+      let res
+      try {
+        res = await group.kickMember(id, block)
+      } catch (err) {
+        if (err.message?.includes("NOT_GROUP_ADMIN") || err.message?.includes("权限不足")) {
+          throw new ReplyError("❎ 权限不足，Bot需要管理员权限")
+        }
+        throw err
+      }
       if (!res) throw new ReplyError(`❎ 踢出${id}失败`)
       return id
     }
