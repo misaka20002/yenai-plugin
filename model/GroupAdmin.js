@@ -410,7 +410,15 @@ export default class GroupAdmin {
       if ((Config.masterQQ?.includes(Number(id) || String(id))) && time != 0) throw new ReplyError("❎ 该命令对主人无效")
 
       const Member = group.pickMember(id)
-      const Memberinfo = Member?.info || await Member?.getInfo?.()
+      let Memberinfo
+      try {
+        Memberinfo = Member?.info || await Member?.getInfo?.()
+      } catch (err) {
+        if (err.message?.includes("不存在") || err.message?.includes("Uin2Uid")) {
+          throw new ReplyError(`❎ 该群没有${isMore ? id : "这个人"}哦~`)
+        }
+        throw err
+      }
       // 判断是否有这个人
       if (!Memberinfo) throw new ReplyError(`❎ 该群没有${isMore ? id : "这个人"}哦~`)
 
@@ -475,7 +483,15 @@ export default class GroupAdmin {
       if (Config.masterQQ?.includes(Number(id) || String(id))) throw new ReplyError("❎ 该命令对主人无效")
 
       const Member = group.pickMember(id)
-      const Memberinfo = Member?.info || await Member?.getInfo?.()
+      let Memberinfo
+      try {
+        Memberinfo = Member?.info || await Member?.getInfo?.()
+      } catch (err) {
+        if (err.message?.includes("不存在") || err.message?.includes("Uin2Uid")) {
+          throw new ReplyError(`❎ 这个群没有${isMore ? id : "这个人"}哦~`)
+        }
+        throw err
+      }
       // 判断是否有这个人
       if (!Memberinfo) throw new ReplyError(`❎ 这个群没有${isMore ? id : "这个人"}哦~`)
       if (Memberinfo.role === "owner") throw new ReplyError("❎ 权限不足，该命令对群主无效")
