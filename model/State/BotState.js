@@ -21,7 +21,7 @@ export default async function getBotState(e) {
     const verKey = e.isPro ? "version" : "ver"
     const platform = apk
       ? `${apk.display} v${apk[verKey]}`
-      : version?.version ?? "未知"
+      : version?.version ?? false
 
     const messageCount = await getMessageCount(bot)
 
@@ -76,6 +76,8 @@ async function getAvatarColor(url) {
     }
   }
 }
+
+const fmt = (n, suf) => (n ? `${n} <span class="suffix">${suf}</span>` : n)
 async function getMessageCount(bot) {
   const nowDate = moment().format("MMDD")
   const keys = [
@@ -92,9 +94,9 @@ async function getMessageCount(bot) {
   const screenshot = values[2] || values[3] || 0
 
   return {
-    sent,
-    recv,
-    screenshot
+    sent: fmt(sent, "收"),
+    recv: fmt(recv, "发"),
+    screenshot: fmt(screenshot, "图片")
   }
 }
 
@@ -102,10 +104,11 @@ function getCountContacts(bot) {
   const friend = bot.fl?.size || 0
   const group = bot.gl?.size || 0
   const groupMember = Array.from(bot.gml?.values() || []).reduce((acc, curr) => acc + curr.size, 0)
+
   return {
-    friend,
-    group,
-    groupMember
+    friend: fmt(friend, "好友"),
+    group: fmt(group, "群组"),
+    groupMember: fmt(groupMember, "群员")
   }
 }
 
