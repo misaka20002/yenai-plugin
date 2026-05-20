@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 
 const {
-  BotNameColor, progressBarColor, redisInfoValColor, startColumn
+  BotNameColor, progressBarColor, redisInfoValColor, startColumn, botInfoColor
 } = Config.style
 // 修改BotNameColor
 const botNameElements = document.querySelectorAll(".header h1")
@@ -21,12 +21,16 @@ const { high, medium, low } = progressBarColor
 const documentElement = document.documentElement
 documentElement.style.setProperty("--high-color", high)
 documentElement.style.setProperty("--medium-color", medium)
-documentElement.style.setProperty("--low-color", low)
+if (low instanceof Array && low.length > 0) {
+  documentElement.style.setProperty("--low-color", low[0])
+} else {
+  documentElement.style.setProperty("--low-color", low)
+}
 
 // 根据圆环数量调整宽度
 const mainHardwareElement = document.querySelectorAll(".mainHardware li")
 const containerElement = document.querySelector(".container")
-let containerElementWidth = 700
+let containerElementWidth = 750
 if (mainHardwareElement.length === 5) {
   containerElementWidth += 50
 }
@@ -34,11 +38,11 @@ if (mainHardwareElement.length === 5) {
 // 多列布局
 let columnCount = 1
 const containerElementHeight = containerElement.offsetHeight
-if (containerElementHeight > 3600) {
+if (containerElementHeight > 4500) {
   columnCount = 4
-} else if (containerElementHeight > 2400) {
+} else if (containerElementHeight > 2900) {
   columnCount = 3
-} else if (containerElementHeight > 1200) {
+} else if (containerElementHeight > 1700) {
   columnCount = 2
 }
 
@@ -51,6 +55,7 @@ if (columnCount >= 2 && startColumn) {
     const copyrightElement = document.querySelector(".copyright")
     copyrightElement.classList.add("abs")
   })
+  document.querySelector(".box").style.marginTop = "0"
 }
 containerElement.style.width = containerElementWidth + "px"
 
@@ -73,3 +78,12 @@ if (hardDiskLieElements.length >= 2) {
     item.style.width = maxWidth + 0.3 + "px"
   })
 }
+document.querySelectorAll(".botVersion").forEach((element, key) => {
+  element.style.background = botInfoColor.botVersion
+})
+document.querySelectorAll(".platform").forEach((element, key) => {
+  element.style.background = botInfoColor.platform
+})
+document.querySelectorAll(".contacts").forEach((element, key) => {
+  element.style.background = botInfoColor.contacts[key % botInfoColor.contacts.length]
+})

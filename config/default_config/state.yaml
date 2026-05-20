@@ -137,11 +137,26 @@ style:
   #主硬件进度条和磁盘进度条的颜色
   progressBarColor:
     # high: "#d73403"
-    # medium: "#ffa500"
-    # low: "#84A0DF"
     high: "#d73403e5"
+    # medium: "#ffa500"
     medium: "rgba(235, 50, 180, 0.856)"
-    low: "rgba(255, 139, 187, 0.856)"
+    # 支持多种颜色 从低到高依次使用 不足从头取 当只有一种颜色时所有进度条都使用同一种颜色
+    low:
+      - "rgba(255, 139, 187, 0.856)"
+      # - "#84A0DF"
+      # - "#2EC272"
+      # - "#8070F9"
   # redis信息值颜色
   # redisInfoValColor: "#485ab6"
   redisInfoValColor: "rgba(255, 139, 187, 0.856)"
+  # bot信息颜色
+  botInfoColor:
+    # bot版本颜色
+    botVersion: "#FBE0F3"
+    # bot平台颜色
+    platform: "#F0EDF2"
+    # 联系人信息颜色 从第一个板块开始取色，取完后从头开始取
+    contacts:
+      - "#F1EDFE"
+      - "#FDF1E6"
+      - "#E9F4FC"
