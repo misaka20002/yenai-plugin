@@ -125,7 +125,7 @@ style:
   startColumn: true
   # 远程背景图片api，设置为false则一直使用默认背景
   # backdrop: "https://t.alcy.cc/mp"
-  backdrop: "https://api.dujin.org/bing/m.php"
+  backdrop: "https://api.mtyqx.cn/tapi/random.php"
   # 当api请求失败时使用的默认背景图，请放置在resources/state/img/bg目录下
   # random - 随机选择背景目录里的一张图片
   # default_bg.jpg 可直接指定bg目录里一张图片，注意请带上后缀名
