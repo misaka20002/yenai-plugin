@@ -65,7 +65,7 @@ export class Assistant extends plugin {
           fnc: "Cyc"
         },
         {
-          reg: "^#?椰奶撤回$",
+          reg: "^#?请七七喝椰奶帮我撤回吧$",
           fnc: "RecallMsgown"
         },
         {
