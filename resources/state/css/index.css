@@ -567,17 +567,6 @@ li {
 .botInfo .header h1 .name {
   max-width: 75%;
 }
-.botInfo .header .botrunTime {
-  position: absolute;
-  right: 5%;
-  top: 10%;
-  font-size: 12px;
-  margin-left: 10px;
-  font-weight: 500;
-  background: radial-gradient(circle at top center, rgba(255, 200, 135, 0.6) 0%, transparent 50%), radial-gradient(circle at top left, rgba(102, 190, 240, 0.6) 0%, transparent 50%), radial-gradient(circle at top right, rgba(255, 100, 100, 0.6) 0%, transparent 50%), radial-gradient(circle at bottom center, rgba(147, 112, 190, 0.6) 0%, transparent 80%);
-  padding: 5px 8px;
-  border-radius: 5px;
-}
 
 .memory .title {
   display: flex;
@@ -666,6 +655,16 @@ li {
   margin: 10px;
   height: auto;
 }
+.memory .speed p:first-child {
+  flex: 0 0 50%;
+  max-width: 50%;
+}
+.memory .speed p:last-child {
+  font-weight: 500;
+}
+.memory .speed p:last-child span {
+  color: #000;
+}
 
 .HardDisk_li .mount {
   min-width: 15px;
@@ -677,35 +676,6 @@ li {
   min-width: 2em;
   line-height: 25px;
   text-align: center;
-}
-
-.speed {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 30px;
-  height: 25px;
-  padding: 0px 10px;
-  font-size: 16px;
-  line-height: 25px;
-}
-.speed p {
-  margin: 0;
-}
-.speed p:first-child {
-  flex: 0 0 32%;
-  max-width: 32%;
-}
-.speed p:last-child {
-  flex: 1 1 68%;
-  text-align: right;
-  font-weight: 700;
-  color: #333;
-}
-.speed p img {
-  vertical-align: middle;
-  height: 14px;
-  margin-right: 6px;
 }
 
 .copyright.abs {
@@ -799,15 +769,33 @@ li {
   text-align: left;
 }
 
-/* 新增：fastFetch 模块内部条目样式（仅新增，不改动盒子样式） */
-.box[data-boxInfo=FastFetch] .speed {
-  padding: 6px 10px;
-  /* 使条目更紧凑 */
-  font-size: 14px;
-  /* 在条目较多时，减少视觉冗余 */
+.speed {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  height: 25px;
+  padding: 0px 10px;
+  font-size: 16px;
+  line-height: 25px;
 }
-.box[data-boxInfo=FastFetch] .speed:last-child {
-  border-bottom: none;
+.speed p {
+  margin: 0;
+}
+.speed p:first-child {
+  flex: 0 0 32%;
+  max-width: 32%;
+}
+.speed p:last-child {
+  flex: 1 1 68%;
+  text-align: right;
+  font-weight: 700;
+  color: #333;
+}
+.speed p img {
+  vertical-align: middle;
+  height: 14px;
+  margin-right: 6px;
 }
 
 .fastFetch .title {
@@ -826,6 +814,8 @@ li {
 .fastFetch .speed {
   height: 35px;
   gap: 15px;
+  font-size: 15px;
+  padding: 0;
 }
 .fastFetch .speed p:first-child {
   max-width: 22%;
@@ -841,10 +831,13 @@ li {
   font-size: 15px;
 }
 .fastFetch .content {
-  -moz-column-count: 2;
-       column-count: 2;
+  display: grid;
+  grid-template-columns: repeat(2, 50%);
+  -moz-column-gap: 10px;
+       column-gap: 10px;
+  row-gap: 5px;
   margin: 5px 10px;
-  padding: 5px 10px;
+  padding: 5px 15px;
 }
 
 .title,
