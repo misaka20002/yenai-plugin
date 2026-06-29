@@ -29,6 +29,7 @@ export class NewState extends plugin {
   }
 
   async monitor(e) {
+    if (!e.isMaster) { return false }
     const data = await getMonitorData()
     await puppeteer.render("state/monitor", data, {
       e,
@@ -37,6 +38,7 @@ export class NewState extends plugin {
   }
 
   async state(e) {
+    if (!e.isMaster) { return false }
     if (!/椰奶/.test(e.msg) && !Config.state.defaultState) return false
     if (e.msg.includes("pro") && Config.state.noPro) return false
 
