@@ -4,6 +4,7 @@ import path from "path"
 import si from "systeminformation"
 import { Version } from "../../components/index.js"
 import { formatDuration } from "../../tools/index.js"
+import moment from "moment"
 
 let osInfo = null;
 
@@ -21,24 +22,13 @@ export default function otherInfo(e) {
       main: osInfo.hostname
     },
     sysTime: {
-      main: getSystime()
+      main: getSystime(),
+      secondary: moment()
+        .subtract(os.uptime(), "seconds")
+        .format("MM/DD HH:mm:ss")
     },
     pluginNum: getPluginNum(e)
   }
-  // // 其他信息
-  // otherInfo.push({
-  //   first: "系统",
-  //   tail: osInfo?.distro
-  // })
-  // // 插件数量
-  // otherInfo.push({
-  //   first: "插件",
-  //   tail: getPluginNum(e)
-  // })
-  // otherInfo.push({
-  //   first: "系统运行",
-  //   tail: getSystime()
-  // })
 
   return otherInfo
 }
